@@ -1,0 +1,14 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.stage {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  user-select: none;
+}

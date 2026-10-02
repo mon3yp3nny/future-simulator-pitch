@@ -1,0 +1,387 @@
+<title>Shaping the Future Storyboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=B612:wght@400;700&family=B612+Mono:wght@400;700&display=swap">
+<style>
+  /* Layout: a short briefing header, a to-scale runtime strip, then a two-up contact sheet of 16:9 frames with shot notes under each. */
+  :root {
+    --bg: #F2F4F7;
+    --surface: #FFFFFF;
+    --fg: #13233A;
+    --muted: #56677F;
+    --rule: #CFD7E2;
+    --accent: #8A5E00;
+    /* The animation's own palette. Fixed: frames look the same in both page themes. */
+    --f-bg: #0C1B2E;
+    --f-panel: #1B3655;
+    --f-dim: #6F8AA8;
+    --f-text: #F2F5F8;
+    --f-accent: #FFC629;
+    --font-ui: "B612", Verdana, "DejaVu Sans", sans-serif;
+    --font-mono: "B612 Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0A1420; --surface: #111F31; --fg: #E8EDF3; --muted: #8EA0B8; --rule: #24384F; --accent: #FFC629;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0A1420; --surface: #111F31; --fg: #E8EDF3; --muted: #8EA0B8; --rule: #24384F; --accent: #FFC629;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 1.55;
+    padding-inline: clamp(16px, 4vw, 48px);
+    padding-block: 40px 72px;
+  }
+  .page { max-width: 1180px; margin-inline: auto; display: flex; flex-direction: column; gap: 40px; }
+
+  header { display: flex; flex-direction: column; gap: 12px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.1; margin: 0; text-wrap: balance; }
+  .lede { max-width: 65ch; color: var(--muted); margin: 0; }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 8px 0 0; padding: 0; list-style: none; font-family: var(--font-mono); font-size: 14px; }
+  .facts b { font-weight: 700; }
+  .facts span { color: var(--muted); }
+
+  h2 { font-size: 20px; margin: 0 0 14px; }
+
+  .strip { display: flex; gap: 3px; }
+  .strip div {
+    min-width: 0; padding: 8px 0; text-align: center;
+    background: var(--surface); border: 1px solid var(--rule);
+    font-family: var(--font-mono); font-size: 13px; font-variant-numeric: tabular-nums;
+  }
+  .strip-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 14px 0 6px; }
+  .slate .alt { color: var(--muted); }
+  .strip-ends { display: flex; justify-content: space-between; margin-top: 6px; font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+
+  .scenes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 40px 32px; }
+  .scenes li { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+  .frame { display: block; width: 100%; height: auto; background: var(--f-bg); border-radius: 4px; }
+  .slate { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
+  .slate h3 { margin: 0; font-size: 18px; }
+  .slate time { font-family: var(--font-mono); font-size: 14px; color: var(--accent); font-variant-numeric: tabular-nums; }
+  dl { margin: 0; display: grid; grid-template-columns: 6.5em 1fr; gap: 6px 12px; font-size: 15px; }
+  dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+  dd { margin: 0; min-width: 0; }
+  dd q { quotes: "“" "”"; font-weight: 700; }
+  dd .none { color: var(--muted); }
+
+  .notes { max-width: 70ch; }
+  .notes ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 8px; }
+
+  /* Inside the frames */
+  .frame text { font-family: var(--font-ui); fill: var(--f-text); }
+  .frame .mono { font-family: var(--font-mono); }
+  .frame .cap { font-size: 32px; font-weight: 700; text-anchor: middle; }
+  .frame .mid { text-anchor: middle; }
+  .f-text { fill: var(--f-text); }
+  .f-accent { fill: var(--f-accent); }
+  .f-dim { fill: var(--f-dim); }
+  .f-panel { fill: var(--f-panel); }
+  .f-bgfill { fill: var(--f-bg); }
+  .frame text.f-accent { fill: var(--f-accent); }
+  .frame text.f-dim { fill: var(--f-dim); }
+  .s-accent { stroke: var(--f-accent); fill: none; }
+  .s-dim { stroke: var(--f-dim); fill: none; }
+  .s-text { stroke: var(--f-text); fill: none; }
+  .s-bg { stroke: var(--f-bg); fill: none; }
+</style>
+
+<div class="page">
+  <header>
+    <div class="eyebrow">Storyboard · draft 5</div>
+    <h1>Shaping the future</h1>
+    <p class="lede">Ten static frames for the intro animation, with timings, the exact text that appears on screen and the optional narration. The narration can be switched on and off at any time with the M key or the speaker symbol in the bottom-right corner. The captions carry the whole message, so nothing depends on the sound.</p>
+    <ul class="facts">
+      <li><b>73 s</b> <span>runtime</span></li>
+      <li><b>10</b> <span>scenes</span></li>
+      <li><b>16:9</b> <span>legible at 1280×720</span></li>
+      <li><b>Voice</b> <span>on or off</span></li>
+      <li><b>English</b></li>
+    </ul>
+  </header>
+
+  <section aria-label="Runtime by scene">
+    <h2>Runtime by scene</h2>
+    <div class="strip">
+      <div style="flex:6.5">1</div><div style="flex:5">2</div><div style="flex:7">3</div><div style="flex:9.5">4</div><div style="flex:8">5</div><div style="flex:6">6</div><div style="flex:10">7</div><div style="flex:7">8</div><div style="flex:6">9</div><div style="flex:8">10</div>
+    </div>
+    <div class="strip-ends"><span>0:00</span><span>1:13</span></div>
+  </section>
+
+  <section aria-label="Scenes">
+    <h2>Scenes</h2>
+    <ol class="scenes">
+
+      <li>
+        <svg class="frame" viewBox="0 0 960 540" role="img" aria-label="Departure board with origin TODAY and an unresolved destination">
+          <defs>
+            <g id="ac" transform="scale(1.3)">
+              <path d="M30,0 C30,-1.8 27,-3.2 22,-3.2 L-14,-3.2 C-22,-3 -27,-1.5 -30,0 C-27,1.5 -22,3 -14,3.2 L22,3.2 C27,3.2 30,1.8 30,0 Z"/>
+              <path d="M9,-3 L-6.5,-25 Q-9.5,-28.5 -16,-29.5 Q-13,-27.8 -11,-25.5 L-6,-10 L-4,-3 Z"/>
+              <path d="M9,3 L-6.5,25 Q-9.5,28.5 -16,29.5 Q-13,27.8 -11,25.5 L-6,10 L-4,3 Z"/>
+              <path d="M-19.5,-2 L-25.5,-8.5 L-28.5,-8.5 L-27,-1.5 Z"/>
+              <path d="M-19.5,2 L-25.5,8.5 L-28.5,8.5 L-27,1.5 Z"/>
+              <rect x="3" y="-11.2" width="7.5" height="3.4" rx="1.5"/>
+              <rect x="3" y="7.8" width="7.5" height="3.4" rx="1.5"/>
+            </g>
+          </defs>
+          <rect class="f-panel" x="120" y="60" width="720" height="290" rx="8"/>
+          <text class="mono f-accent" x="150" y="112" font-size="26" font-weight="700">DEPARTURES</text>
+          <text class="mono f-dim" x="150" y="162" font-size="16">FLIGHT</text>
+          <text class="mono f-dim" x="300" y="162" font-size="16">FROM</text>
+          <text class="mono f-dim" x="500" y="162" font-size="16">TO</text>
+          <text class="mono" x="150" y="234" font-size="40" font-weight="700">STF 1</text>
+          <text class="mono" x="300" y="234" font-size="40" font-weight="700">TODAY</text>
+          <g>
+            <rect class="f-bgfill" x="500" y="186" width="44" height="64" rx="4"/>
+            <rect class="f-bgfill" x="552" y="186" width="44" height="64" rx="4"/>
+            <rect class="f-bgfill" x="604" y="186" width="44" height="64" rx="4"/>
+            <rect class="f-bgfill" x="656" y="186" width="44" height="64" rx="4"/>
+            <rect class="f-bgfill" x="708" y="186" width="44" height="64" rx="4"/>
+            <rect class="f-bgfill" x="760" y="186" width="44" height="64" rx="4"/>
+            <text class="mono mid f-accent" x="522" y="232" font-size="36" font-weight="700">?</text>
+            <text class="mono mid f-accent" x="574" y="232" font-size="36" font-weight="700">?</text>
+            <text class="mono mid f-accent" x="626" y="232" font-size="36" font-weight="700">?</text>
+            <text class="mono mid f-accent" x="678" y="232" font-size="36" font-weight="700">?</text>
+            <text class="mono mid f-accent" x="730" y="232" font-size="36" font-weight="700">?</text>
+            <text class="mono mid f-accent" x="782" y="232" font-size="36" font-weight="700">?</text>
+          </g>
+          <circle class="f-accent" cx="162" cy="302" r="10"/>
+          <text class="mono f-accent" x="186" y="311" font-size="26" font-weight="700">BOARDING</text>
+          <text class="cap" x="480" y="450">This flight has no fixed destination.</text>
+        </svg>
+        <div class="slate"><h3>1 · Gate</h3><time>0:00 – 0:06.5</time></div>
+        <dl>
+          <dt>On screen</dt><dd>Board: DEPARTURES, FLIGHT STF 1, FROM TODAY, TO ??????, BOARDING. Caption: <q>This flight has no fixed destination.</q></dd>
+          <dt>Motion</dt><dd>The six destination tiles keep flipping and never settle. The caption appears after two seconds.</dd>
+          <dt>Voice</dt><dd>Welcome. This flight is a little different. It has no fixed destination.</dd>
+        </dl>
+      </li>
+
+      <li>
+        <svg class="frame" viewBox="0 0 960 540" role="img" aria-label="Open aircraft door seen from the jet bridge">
+          <rect class="f-panel" x="0" y="40" width="960" height="440"/>
+          <g class="f-bgfill">
+            <rect x="70" y="170" width="44" height="60" rx="18"/>
+            <rect x="170" y="170" width="44" height="60" rx="18"/>
+            <rect x="270" y="170" width="44" height="60" rx="18"/>
+            <rect x="646" y="170" width="44" height="60" rx="18"/>
+            <rect x="746" y="170" width="44" height="60" rx="18"/>
+            <rect x="846" y="170" width="44" height="60" rx="18"/>
+          </g>
+          <rect class="f-accent" x="400" y="120" width="160" height="330" rx="26"/>
+          <polygon class="f-dim" points="400,450 560,450 780,540 180,540"/>
+        </svg>
+        <div class="slate"><h3>2 · Boarding</h3><time>0:06.5 – 0:11.5</time></div>
+        <dl>
+          <dt>On screen</dt><dd><span class="none">No text.</span></dd>
+          <dt>Motion</dt><dd>A slow push forward along the jet bridge and through the lit door. The door closes behind us and the frame goes dark.</dd>
+          <dt>Voice</dt><dd>Step on board. We leave from today.</dd>
+        </dl>
+      </li>
+
+      <li>
+        <svg class="frame" viewBox="0 0 960 540" role="img" aria-label="Map view with the aircraft at the left and four unnamed destinations at the right">
+          <g class="s-dim" stroke-width="3" stroke-dasharray="10 12">
+            <line x1="170" y1="330" x2="850" y2="76"/>
+            <line x1="170" y1="330" x2="850" y2="184"/>
+            <line x1="170" y1="330" x2="850" y2="293"/>
+            <line x1="170" y1="330" x2="850" y2="400"/>
+          </g>
+          <g class="s-dim" stroke-width="4">
+            <circle cx="880" cy="72" r="20"/><circle cx="880" cy="182" r="20"/><circle cx="880" cy="292" r="20"/><circle cx="880" cy="402" r="20"/>
+          </g>
+          <line class="s-accent" x1="40" y1="330" x2="120" y2="330" stroke-width="6" stroke-linecap="round"/>
+          <use href="#ac" class="f-text" transform="translate(130,330)"/>
+          <text class="mono f-dim" x="40" y="374" font-size="18">TODAY</text>
+          <text class="cap" x="480" y="505">Where we land depends on you.</text>
+        </svg>
+        <div class="slate"><h3>3 · Take-off</h3><time>0:11.5 – 0:18.5</time></div>
+        <dl>
+          <dt>On screen</dt><dd>Label: TODAY. Caption: <q>Where we land depends on you.</q></dd>
+          <dt>Motion</dt><dd>The view opens from above. The aircraft starts moving right. Four destinations fade in ahead, unnamed.</dd>
+          <dt>Voice</dt><dd>Ahead of us lie several possible futures. Where we land depends on you.</dd>
+        </dl>
+      </li>
+
+      <li>
+        <svg class="frame" viewBox="0 0 960 540" role="img" aria-label="Question card asking Window, middle or aisle with three answer options">
+          <line class="s-accent" x1="180" y1="80" x2="390" y2="80" stroke-width="6" stroke-linecap="round"/>
+          <use href="#ac" class="f-text" transform="translate(400,80)"/>
+          <line class="s-dim" x1="446" y1="80" x2="540" y2="80" stroke-width="3" stroke-dasharray="10 12"/>
+          <polygon class="s-dim" points="560,66 574,80 560,94 546,80" stroke-width="4"/>
+          <text class="mono f-dim" x="590" y="86" font-size="18">WAYPOINT 1</text>
+          <rect class="f-panel" x="180" y="140" width="600" height="230" rx="8"/>
+          <text class="mid" x="480" y="214" font-size="36" font-weight="700">Window, middle or aisle?</text>
+          <rect class="s-dim" x="210" y="258" width="166.7" height="80" rx="6" stroke-width="4"/>
+          <rect class="s-dim" x="396.7" y="258" width="166.7" height="80" rx="6" stroke-width="4"/>
+          <rect class="s-dim" x="583.3" y="258" width="166.7" height="80" rx="6" stroke-width="4"/>
+          <text class="mid" x="293.3" y="309" font-size="30">Window</text>
+          <text class="mid" x="480" y="309" font-size="30">Middle</text>
+          <text class="mid" x="666.7" y="309" font-size="30">Aisle</text>
+          <text class="cap" x="480" y="470">You will be asked a question.</text>
+        </svg>
+        <div class="slate"><h3>4 · The question</h3><time>0:18.5 – 0:28</time></div>
+        <dl>
+          <dt>On screen</dt><dd>Label: WAYPOINT 1. Card: <q>Window, middle or aisle?</q> with answers Window, Middle and Aisle. Caption: <q>You will be asked a question.</q></dd>
+          <dt>Motion</dt><dd>The aircraft approaches a waypoint and slows. The question card rises into place.</dd>
+          <dt>Voice</dt><dd>Along the way, you will be asked a few questions about how we use AI. Here is a simple example: window, middle, or aisle?</dd>
+        </dl>
+      </li>
+
+      <li>
+        <svg class="frame" viewBox="0 0 960 540" role="img" aria-label="Vote result: Window 54 percent, locked; Middle 15 percent; Aisle 31 percent">
+          <line class="s-accent" x1="180" y1="80" x2="520" y2="80" stroke-width="6" stroke-linecap="round"/>
+          <use href="#ac" class="f-text" transform="translate(516,80)"/>
+          <polygon class="f-accent" points="560,66 574,80 560,94 546,80"/>
+          <text class="mono f-dim" x="590" y="86" font-size="18">WAYPOINT 1</text>
+          <rect class="f-panel" x="180" y="140" width="600" height="235" rx="8"/>
+          <text x="210" y="176" font-size="24" font-weight="700">Window</text>
+          <g transform="translate(570,148)">
+            <rect class="f-accent" x="0" y="10" width="24" height="18" rx="3"/>
+            <path class="s-accent" d="M5,10 V7 a7,7 0 0 1 14,0 V10" stroke-width="4"/>
+          </g>
+          <text class="mono f-accent" x="670" y="174" font-size="18" font-weight="700" text-anchor="end">LOCKED</text>
+          <rect class="f-bgfill" x="210" y="188" width="460" height="26"/>
+          <rect class="f-accent" x="210" y="188" width="248" height="26"/>
+          <text class="mono" x="690" y="209" font-size="24" font-weight="700">54 %</text>
+          <text class="f-dim" x="210" y="248" font-size="24" font-weight="700">Middle</text>
+          <rect class="f-bgfill" x="210" y="260" width="460" height="26"/>
+          <rect class="f-dim" x="210" y="260" width="69" height="26"/>
+          <text class="mono f-dim" x="690" y="281" font-size="24" font-weight="700">15 %</text>
+          <text class="f-dim" x="210" y="320" font-size="24" font-weight="700">Aisle</text>
+          <rect class="f-bgfill" x="210" y="332" width="460" height="26"/>
+          <rect class="f-dim" x="210" y="332" width="143" height="26"/>
+          <text class="mono f-dim" x="690" y="353" font-size="24" font-weight="700">31 %</text>
+          <text class="cap" x="480" y="438">The majority decides.</text>
+          <text class="cap" x="480" y="482">The answer is locked in.</text>
+        </svg>
+        <div class="slate"><h3>5 · Vote and lock</h3><time>0:28 – 0:36</time></div>
+        <dl>
+          <dt>On screen</dt><dd>Card: Window 54 %, LOCKED; Middle 15 %; Aisle 31 %. Caption: <q>The majority decides. The answer is locked in.</q></dd>
+          <dt>Motion</dt><dd>All three bars grow. Window wins, the lock closes on it, and the other two answers dim. The waypoint marker fills.</dd>
+          <dt>Voice</dt><dd>Everyone votes. The majority decides, and that answer is locked in. There is no going back.</dd>
+        </dl>
+      </li>
+
+      <li>
+        <svg class="frame" viewBox="0 0 960 540" role="img" aria-label="The aircraft turns away from its old heading after the first waypoint">
+          <g class="s-dim" stroke-width="4">
+            <circle cx="880" cy="72" r="20"/><circle cx="880" cy="182" r="20"/><circle cx="880" cy="292" r="20"/><circle cx="880" cy="402" r="20"/>
+          </g>
+          <line class="s-dim" x1="216" y1="330" x2="470" y2="330" stroke-width="3" stroke-dasharray="10 12"/>
+          <line class="s-dim" x1="340" y1="279" x2="850" y2="94" stroke-width="3" stroke-dasharray="10 12"/>
+          <polyline class="s-accent" points="40,330 200,330 294,296" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon class="f-text" points="200,316 214,330 200,344 186,330"/>
+          <use href="#ac" class="f-text" transform="translate(300,294) rotate(-20)"/>
+          <text class="mono mid" x="200" y="378" font-size="20" font-weight="700">20°</text>
+          <text class="cap" x="480" y="505">Every answer changes our course.</text>
+        </svg>
+        <div class="slate"><h3>6 · Course change</h3><time>0:36 – 0:42</time></div>
+        <dl>
+          <dt>On screen</dt><dd>Label: 20°. Caption: <q>Every answer changes our course.</q></dd>
+          <dt>Motion</dt><dd>Back on the map. The aircraft banks onto a new heading. The old heading stays visible as a faint dashed line, then fades.</dd>
+          <dt>Voice</dt><dd>Every locked answer changes our course.</dd>
+        </dl>
+      </li>
+
+      <li>
+        <svg class="frame" viewBox="0 0 960 540" role="img" aria-label="Three waypoints: a slight turn of 8 degrees and a sharp turn of 39 degrees">
+          <g class="s-dim" stroke-width="4">
+            <circle cx="880" cy="72" r="20"/><circle cx="880" cy="182" r="20"/><circle cx="880" cy="292" r="20"/><circle cx="880" cy="402" r="20"/>
+          </g>
+          <line class="s-dim" x1="716" y1="318" x2="852" y2="388" stroke-width="3" stroke-dasharray="10 12"/>
+          <polyline class="s-accent" points="40,330 200,330 369,268 545,231 672,296" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon class="f-text" points="200,316 214,330 200,344 186,330"/>
+          <polygon class="f-text" points="369,254 383,268 369,282 355,268"/>
+          <polygon class="f-text" points="545,217 559,231 545,245 531,231"/>
+          <use href="#ac" class="f-text" transform="translate(679,299) rotate(27)"/>
+          <text class="mono mid" x="200" y="378" font-size="20" font-weight="700">20°</text>
+          <text class="mono mid" x="369" y="232" font-size="20" font-weight="700">8°</text>
+          <text class="mono mid" x="545" y="194" font-size="20" font-weight="700">39°</text>
+          <text class="cap" x="480" y="505">The clearer the vote, the sharper the turn.</text>
+        </svg>
+        <div class="slate"><h3>7 · Two more waypoints</h3><time>0:42 – 0:52</time></div>
+        <dl>
+          <dt>On screen</dt><dd>Labels: 20°, 8°, 39°. Caption: <q>The clearer the vote, the sharper the turn.</q></dd>
+          <dt>Motion</dt><dd>Two more questions pass quickly, shown only as waypoints. A narrow vote changes the heading by only 8°. A clear vote swings it by 39°.</dd>
+          <dt>Voice</dt><dd>A narrow vote turns us only slightly. A clear vote turns us sharply.</dd>
+        </dl>
+      </li>
+
+      <li>
+        <svg class="frame" viewBox="0 0 960 540" role="img" aria-label="The full route leads to one highlighted destination">
+          <g class="s-dim" stroke-width="4">
+            <circle cx="880" cy="72" r="20"/><circle cx="880" cy="182" r="20"/><circle cx="880" cy="292" r="20"/>
+          </g>
+          <circle class="s-accent" cx="880" cy="402" r="24" stroke-width="6"/>
+          <circle class="f-accent" cx="880" cy="402" r="9"/>
+          <polyline class="s-accent" points="40,330 200,330 369,268 545,231 782,352" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon class="f-text" points="200,316 214,330 200,344 186,330"/>
+          <polygon class="f-text" points="369,254 383,268 369,282 355,268"/>
+          <polygon class="f-text" points="545,217 559,231 545,245 531,231"/>
+          <use href="#ac" class="f-text" transform="translate(790,356) rotate(27)"/>
+          <text class="cap" x="430" y="505">Your answers add up to a destination.</text>
+        </svg>
+        <div class="slate"><h3>8 · The route</h3><time>0:52 – 0:59</time></div>
+        <dl>
+          <dt>On screen</dt><dd>Caption: <q>Your answers add up to a destination.</q></dd>
+          <dt>Motion</dt><dd>The view pulls back to show the whole route. One destination lights up; the other three stay dim. It is still unnamed.</dd>
+          <dt>Voice</dt><dd>Question by question, your answers add up to a destination.</dd>
+        </dl>
+      </li>
+
+      <li>
+        <svg class="frame" viewBox="0 0 960 540" role="img" aria-label="The aircraft door opens onto bright light">
+          <rect class="f-panel" x="0" y="0" width="960" height="540"/>
+          <polygon class="f-accent" points="380,470 580,470 760,540 200,540"/>
+          <rect class="f-text" x="380" y="80" width="200" height="390" rx="28"/>
+          <polygon class="f-dim" points="380,108 290,140 290,512 380,470"/>
+        </svg>
+        <div class="slate"><h3>9 · Arrival</h3><time>0:59 – 1:05</time></div>
+        <dl>
+          <dt>On screen</dt><dd><span class="none">No text.</span></dd>
+          <dt>Motion</dt><dd>From inside the cabin, the door swings open onto plain bright light. We do not see what is outside. The light fills the frame.</dd>
+          <dt>Voice</dt><dd>And when the door opens, we step out into the future this group has chosen.</dd>
+        </dl>
+      </li>
+
+      <li>
+        <svg class="frame" viewBox="0 0 960 540" role="img" aria-label="Title card: Shaping the future">
+          <polyline class="s-accent" points="300,150 400,150 480,122 560,106 640,146" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="f-accent" cx="660" cy="156" r="10"/>
+          <text class="mid" x="480" y="270" font-size="64" font-weight="700">Shaping the future</text>
+          <text class="mid" x="480" y="350" font-size="30">You are not passengers.</text>
+          <text class="mid f-accent" x="480" y="394" font-size="30" font-weight="700">You set the course.</text>
+        </svg>
+        <div class="slate"><h3>10 · Title</h3><time>1:05 – 1:13</time></div>
+        <dl>
+          <dt>On screen</dt><dd>Title: <q>Shaping the future</q> Lines: <q>You are not passengers. You set the course.</q></dd>
+          <dt>Motion</dt><dd>The light settles into the dark background. The route draws itself above the title. The card holds until the animation is restarted.</dd>
+          <dt>Voice</dt><dd>Shaping the future. You are not passengers. You set the course.</dd>
+        </dl>
+      </li>
+
+    </ol>
+  </section>
+
+  <section class="notes" aria-label="Where this differs from the prompt">
+    <h2>Where this differs from the prompt</h2>
+    <ul>
+      <li>The sample question is “Window, middle or aisle?”, with three answers like the real questionnaire. It fits the flight and says nothing about AI.</li>
+      <li>Scene 3 has a caption the prompt did not list, so the map makes sense without a presenter.</li>
+      <li>Scene 7 has a caption, and each waypoint shows the size of its turn in degrees, the way a heading change is given in navigation.</li>
+      <li>The aircraft is drawn to the proportions of an Airbus A350 seen from above, with its curved wingtips. It is an own drawing with no logo or livery.</li>
+      <li>The two score axes are shown as one thing: turning left or right. It explains the principle but is not the real scoring model.</li>
+      <li>Sound is optional. There is one spoken line per scene, shown under Voice. The speaker symbol is always visible on the start screen; while the animation plays it appears only when the mouse moves.</li>
+      <li>All text is set in B612, the open-source typeface made for aircraft cockpit displays. It stays readable when a screen share is compressed.</li>
+    </ul>
+  </section>
+</div>
